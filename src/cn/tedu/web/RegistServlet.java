@@ -73,6 +73,7 @@ public class RegistServlet extends HttpServlet {
 			return;
 		}
 		//用户名存在验证
+		
 		//验证码验证
 		//将数据存入数据库
 		//给用户提示信息
