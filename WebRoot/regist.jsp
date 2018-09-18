@@ -5,9 +5,99 @@
 		<title>欢迎注册EasyMall</title>
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="css/regist.css"/>
+		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.js"></script>
+		<script type="text/javascript" src="js/messages_zh.js"></script>
+		<script type="text/javascript" src="js/additional-methods.js"></script>
+		<script type="text/javascript">
+	         $().ready(function() {
+			// 在键盘按下并释放及提交后验证提交表单
+			  $("#onfocusout").validate({
+			    rules: {
+			      username: {
+			        required: true,
+			        minlength: 2,
+			        remote: {
+						    url: "/AjaxCheckUsernameServlet",     //后台处理程序
+						    type: "post",               //数据发送方式  
+						    data: {                     //要传递的数据
+						        username: function() {
+						            return $("#username").val();
+						        }
+						    },
+						    dataFilter: function (data) {//判断控制器返回的内容
+						    alert(data);
+                            if (data == "true") {
+                                return true;
+                            }
+                            else {
+                                return false;
+                            }
+                        }
+					},
+			      },
+			      password: {
+			        required: true,
+			        minlength: 5
+			      },
+			      password2: {
+			        required: true,
+			        minlength: 5,
+			        equalTo: "#password"
+			      },
+			      nickname: {
+			        required: true,
+			        minlength: 2
+			      },
+			      email: {
+			        required: true,
+			        email: true
+			      },
+			      valistr: {
+			        required: true,
+			      }
+			    },
+			    messages: {
+			      username: {
+			        required: "请输入用户名",
+			        minlength: "用户名至少由两个字母组成",
+			        remote:"用户名不可用"
+			      },
+			      password: {
+			        required: "请输入密码",
+			        minlength: "密码不能小于 5 个字母"
+			      },
+			      password2: {
+			        required: "请输入确认密码",
+			        minlength: "确认密码 同上",
+			        equalTo: "两次密码输入不一致"
+			      },
+			      nickname: {
+			        required: "请输入昵称",
+			        minlength: "昵称至少由两个字母组成"
+			      },
+			      email: {
+			        required: "请输入邮箱",
+			        email: "请输入一个正确的邮箱"
+			      },
+			      valistr: {
+			        required: "请输入验证码"
+			      }
+			     },
+			     errorPlacement: function(error, element) {  
+                            error.appendTo(element.parent());  
+                          },        
+			    });
+			});
+	   </script>
+	   <style>
+        .error{
+	       color:red;
+           }
+     </style>
 	</head>
 	<body>
-		<form action="/RegistServlet" method="POST">
+		<form action="/RegistServlet" method="POST" id="onfocusout">
 			<h1>欢迎注册EasyMall</h1>
 			<table>
 			    <tr>
@@ -18,37 +108,37 @@
 				<tr>
 					<td class="tds">用户名：</td>
 					<td>
-						<input type="text" name="username"/>
+						<input type="text" id="username" name="username" value="<%=request.getParameter("username") == null ? "" : request.getParameter("username") %>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">密码：</td>
 					<td>
-						<input type="password" name="password"/>
+						<input type="password" id="password" name="password" value="<%=request.getParameter("password") == null ? "" : request.getParameter("password") %>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">确认密码：</td>
 					<td>
-						<input type="password" name="password2"/>
+						<input type="password" id="password2" name="password2" value="<%=request.getParameter("password2") == null ? "" : request.getParameter("password2") %>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">昵称：</td>
 					<td>
-						<input type="text" name="nickname"/>
+						<input type="text" id="nickname" name="nickname" value="<%=request.getParameter("nickname") == null ? "" : request.getParameter("nickname") %>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">邮箱：</td>
 					<td>
-						<input type="text" name="email"/>
+						<input type="text" id="email" name="email" value="<%=request.getParameter("email") == null ? "" : request.getParameter("email") %>"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">验证码：</td>
 					<td>
-						<input type="text" name="valistr"/>
+						<input type="text" id="valistr" name="valistr"/>
 						<img src="img/regist/yzm.jpg" width="" height="" alt="" />
 					</td>
 				</tr>
