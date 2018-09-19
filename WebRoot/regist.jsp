@@ -2,7 +2,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>欢迎注册EasyMall</title>
+		<title>欢迎注册MyEasyMall</title>
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="css/regist.css"/>
 		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
@@ -10,7 +10,7 @@
 		<script type="text/javascript" src="js/messages_zh.js"></script>
 		<script type="text/javascript" src="js/additional-methods.js"></script>
 		<script type="text/javascript">
-	         $().ready(function() {
+	    $().ready(function() {
 			// 在键盘按下并释放及提交后验证提交表单
 			  $("#onfocusout").validate({
 			    rules: {
@@ -20,21 +20,26 @@
 			        remote: {
 						    url: "/AjaxCheckUsernameServlet",     //后台处理程序
 						    type: "post",               //数据发送方式  
-						    data: {                     //要传递的数据
+						    dataType: "json",           //接受数据格式 
+						    data: {                      //要传递的数据
 						        username: function() {
 						            return $("#username").val();
 						        }
-						    },
+						    }
+						    /*
+						    不要轻信百度，瞎几把乱写。害我
 						    dataFilter: function (data) {//判断控制器返回的内容
-						    alert(data);
+						    
                             if (data == "true") {
+                            alert(data);
                                 return true;
                             }
                             else {
+                            alert(data);
                                 return false;
                             }
-                        }
-					},
+                        }*/
+					}
 			      },
 			      password: {
 			        required: true,
@@ -55,6 +60,16 @@
 			      },
 			      valistr: {
 			        required: true,
+			        remote: {
+						    url: "/AjaxCheckVerifyCodeServlet",     //后台处理程序
+						    type: "post",               //数据发送方式  
+						    dataType: "json",           //接受数据格式 
+						    data: {                      //要传递的数据
+						        username: function() {
+						            return $("#valistr").val();
+						        }
+						    }
+					}
 			      }
 			    },
 			    messages: {
@@ -81,14 +96,28 @@
 			        email: "请输入一个正确的邮箱"
 			      },
 			      valistr: {
-			        required: "请输入验证码"
+			        required: "请输入验证码",
+			        remote:"验证码不正确"
 			      }
 			     },
 			     errorPlacement: function(error, element) {  
                             error.appendTo(element.parent());  
-                          },        
+                          },
+                 onkeyup:false                 
 			    });
-			});
+			    
+			    
+	  //为img标签添加一个点击事件
+      $("#valiImage").click(function(){
+		  //每次点击修改src的值，在后面拼接一个不同的参数
+		  //获取当前的时间戳
+		  var timeStr = new Date().getTime();
+		  //将时间戳拼接在url后面，实现每次点击都不一样
+		  var url = "/VerifyCodeServlet?time="+timeStr;
+		  //修改img的src的属性
+		  $(this).attr("src",url);
+	});
+});
 	   </script>
 	   <style>
         .error{
@@ -139,7 +168,7 @@
 					<td class="tds">验证码：</td>
 					<td>
 						<input type="text" id="valistr" name="valistr"/>
-						<img src="img/regist/yzm.jpg" width="" height="" alt="" />
+						<img id="valiImage" src="/VerifyCodeServlet" width="" height="" alt="" />
 					</td>
 				</tr>
 				<tr>

@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,7 +40,7 @@ public class RegistServlet extends HttpServlet {
 		String password2 = req.getParameter("password2");
 		String nickname = req.getParameter("nickname");
 		String email = req.getParameter("email");
-		String valistr = req.getParameter("valistr");
+		String valistr = req.getParameter("valistr").trim().toUpperCase();
 		//表单验证
 		//非空验证
 		if(WebUtils.isEmpty(username)){
@@ -100,6 +101,17 @@ public class RegistServlet extends HttpServlet {
 		}
 		
 		//验证码验证
+		//获取ServletContext对象
+		ServletContext sc = this.getServletContext();
+		// 从ServletContext对象中取出验证码信息
+		String verifyCode = sc.getAttribute("verifyCode").toString().toUpperCase();
+		//对比验证码信息
+		if(!verifyCode.equals(valistr)){
+			WebUtils.setEmptyMsg(req, "验证码不正确", resp);
+			return;
+		}
+		
+		
 		//将数据存入数据库
 		String sql2 = "insert into user values(null,?,?,?,?)";
 		Connection conn2 = null;

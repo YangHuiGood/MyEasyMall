@@ -17,6 +17,16 @@
     <servlet-name>AjaxCheckUsernameServlet</servlet-name>
     <servlet-class>cn.tedu.web.AjaxCheckUsernameServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>VerifyCodeServlet</servlet-name>
+    <servlet-class>cn.tedu.web.VerifyCodeServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AjaxCheckVerifyCodeServlet</servlet-name>
+    <servlet-class>cn.tedu.web.AjaxCheckVerifyCodeServlet</servlet-class>
+  </servlet>
+
+
 
 
   <servlet-mapping>
@@ -26,6 +36,14 @@
   <servlet-mapping>
     <servlet-name>AjaxCheckUsernameServlet</servlet-name>
     <url-pattern>/AjaxCheckUsernameServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>VerifyCodeServlet</servlet-name>
+    <url-pattern>/VerifyCodeServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AjaxCheckVerifyCodeServlet</servlet-name>
+    <url-pattern>/AjaxCheckVerifyCodeServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
