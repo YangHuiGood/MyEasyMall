@@ -102,9 +102,9 @@ public class RegistServlet extends HttpServlet {
 		
 		//验证码验证
 		//获取ServletContext对象
-		ServletContext sc = this.getServletContext();
-		// 从ServletContext对象中取出验证码信息
-		String verifyCode = sc.getAttribute("verifyCode").toString().toUpperCase();
+//		ServletContext sc = this.getServletContext();
+		// 从session对象中取出验证码信息
+		String verifyCode = req.getSession().getAttribute("verifyCode").toString().toUpperCase();
 		//对比验证码信息
 		if(!verifyCode.equals(valistr)){
 			WebUtils.setEmptyMsg(req, "验证码不正确", resp);

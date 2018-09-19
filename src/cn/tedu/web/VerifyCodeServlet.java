@@ -35,10 +35,11 @@ public class VerifyCodeServlet extends HttpServlet {
 		//将验证码信息输入到控制台
 //		System.out.println(img.getCode());
 		//将验证码信息设置在ServletContext中
-		//得到ServletContext对象
-		ServletContext sc = this.getServletContext();
-		//设置验证码信息
-		sc.setAttribute("verifyCode", img.getCode());
+		//得到ServletContext对象，多用户会有问题
+//		ServletContext sc = this.getServletContext();
+		//将验证码信息存入session中
+		//在session中设置验证码信息
+		req.getSession().setAttribute("verifyCode", img.getCode());
 	}
 
 	/**

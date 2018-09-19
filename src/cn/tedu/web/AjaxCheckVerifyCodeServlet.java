@@ -30,7 +30,9 @@ public class AjaxCheckVerifyCodeServlet extends HttpServlet {
 		//获取请求参数
 		String valistr = req.getParameter("valistr").trim().toUpperCase();
 		// 从ServletContext对象中取出验证码信息
-		String verifyCode = sc.getAttribute("verifyCode").toString().toUpperCase();
+//		String verifyCode = sc.getAttribute("verifyCode").toString().toUpperCase();
+		//从session中取出验证码信息
+		String verifyCode = req.getSession().getAttribute("verifyCode").toString().toUpperCase();
 		if(verifyCode.equals(valistr)){
 			resp.getWriter().write("true");
 		}else{
