@@ -139,8 +139,8 @@ public class RegistServlet extends HttpServlet {
 			int count = ps2.executeUpdate();
 			if(count > -1){
 				//5.保存成功-提示成功信息，定时刷新到首页
-				resp.getWriter().write("<h1 style='text-align: center;color:red'>恭喜您，注册成功！3秒后跳转至首页</h1>");
-				resp.setHeader("refresh","3;url="+req.getContextPath()+"/index.jsp");
+				resp.getWriter().write("<h1 style='text-align: center;color:red'>恭喜您，注册成功！3秒后跳转至登录页面</h1>");
+				resp.setHeader("refresh","3;url="+req.getContextPath()+"/login.jsp");
 			}else{
 				WebUtils.setEmptyMsg(req, "插入数据出现异常，请稍后重试...", resp);
 				return;

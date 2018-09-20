@@ -6,7 +6,16 @@
 <div id="common_head">
 	<div id="line1">
 		<div id="content">
-			<a href="/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/regist.jsp">注册</a>
+			<%
+		  HttpSession sess = request.getSession();
+		  if(sess == null || sess.getAttribute("user") == null){%>
+		     <!--用户没有登录  -->
+		     <a href="/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/regist.jsp">注册</a>
+		 <% }else{%>
+		    欢迎  &nbsp;<%=request.getSession().getAttribute("user") %> &nbsp;回来 |&nbsp;&nbsp;<a href="/LogoutServlet">注销</a>
+		  
+		 <% }
+		 %>
 		</div>
 	</div>
 	<div id="line2">

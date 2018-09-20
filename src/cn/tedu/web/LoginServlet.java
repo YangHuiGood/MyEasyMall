@@ -2,6 +2,10 @@ package cn.tedu.web;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -9,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import cn.tedu.util.JDBCUtils;
 import cn.tedu.util.WebUtils;
 
 public class LoginServlet extends HttpServlet {
@@ -58,7 +63,33 @@ public class LoginServlet extends HttpServlet {
 			cookie.setPath(req.getContextPath()+"/");
 			resp.addCookie(cookie);
 		}
-		resp.sendRedirect(req.getContextPath()+"/index.jsp");
+		//登录
+		String sql = "select * from user where username = ? and password =?";
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			conn = JDBCUtils.getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, username);
+			ps.setString(2, password);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				req.getSession().setAttribute("user", username);
+				resp.sendRedirect(req.getContextPath()+"/index.jsp");
+			}else{
+				req.setAttribute("errMsg", "用户名或密码错误");
+				req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			new RuntimeException("登录出现异常"+e.getMessage());
+		}finally{
+			JDBCUtils.close(conn, ps, rs);
+		}
+		
+		//resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		
 	}
 
