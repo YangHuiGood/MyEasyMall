@@ -6,7 +6,7 @@
 <div id="common_head">
 	<div id="line1">
 		<div id="content">
-			<a href="#">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/regist.jsp">注册</a>
+			<a href="/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/regist.jsp">注册</a>
 		</div>
 	</div>
 	<div id="line2">

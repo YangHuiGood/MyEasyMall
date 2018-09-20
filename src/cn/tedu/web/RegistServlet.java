@@ -11,6 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import cn.tedu.util.JDBCUtils;
 import cn.tedu.util.WebUtils;
@@ -42,6 +43,28 @@ public class RegistServlet extends HttpServlet {
 		String email = req.getParameter("email");
 		String valistr = req.getParameter("valistr").trim().toUpperCase();
 		//表单验证
+		//验证码验证
+		if(WebUtils.isEmpty(valistr)){
+			WebUtils.setEmptyMsg(req, "验证码不能为空", resp);
+			return;
+		}else{
+			// 从session对象中取出验证码信息
+			HttpSession session = req.getSession(false);
+			boolean flag = true;//默认验证码没问题
+			if(session == null || session.getAttribute("verifyCode") == null){
+				flag = false;
+			}else{
+				String verifyCode = (String)session.getAttribute("verifyCode");
+				if(!verifyCode.equalsIgnoreCase(valistr)){
+					flag = false;
+				}
+			}
+			if(flag == false){
+				WebUtils.setEmptyMsg(req, "验证码不正确", resp);
+				return;
+			}
+		}
+		
 		//非空验证
 		if(WebUtils.isEmpty(username)){
 			WebUtils.setEmptyMsg(req, "用户名不能为空", resp);
@@ -61,10 +84,6 @@ public class RegistServlet extends HttpServlet {
 		}
 		if(WebUtils.isEmpty(email)){
 			WebUtils.setEmptyMsg(req, "邮箱不能为空", resp);
-			return;
-		}
-		if(WebUtils.isEmpty(valistr)){
-			WebUtils.setEmptyMsg(req, "验证码不能为空", resp);
 			return;
 		}
 		//密码一致性验证
@@ -100,16 +119,10 @@ public class RegistServlet extends HttpServlet {
 			JDBCUtils.close(conn, ps, rs);
 		}
 		
-		//验证码验证
+		
 		//获取ServletContext对象
 //		ServletContext sc = this.getServletContext();
-		// 从session对象中取出验证码信息
-		String verifyCode = req.getSession().getAttribute("verifyCode").toString().toUpperCase();
-		//对比验证码信息
-		if(!verifyCode.equals(valistr)){
-			WebUtils.setEmptyMsg(req, "验证码不正确", resp);
-			return;
-		}
+		
 		
 		
 		//将数据存入数据库

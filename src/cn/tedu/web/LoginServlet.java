@@ -1,17 +1,17 @@
 package cn.tedu.web;
 
 import java.io.IOException;
+import java.net.URLEncoder;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import cn.tedu.util.WebUtils;
 
-public class AjaxCheckVerifyCodeServlet extends HttpServlet {
+public class LoginServlet extends HttpServlet {
 
 	/**
 	 * The doGet method of the servlet. <br>
@@ -25,29 +25,40 @@ public class AjaxCheckVerifyCodeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// 获取web.xml中配置的字符集
-		ServletContext sc = this.getServletContext();
-		String encode = sc.getInitParameter("encode");
-		// 1.处理乱码问题 请求乱码 应答乱码
-		resp.setContentType("text/html;charset=" + encode);
-		//获取请求参数
-		String valistr = req.getParameter("valistr");
-		//从session中取出验证码信息
-		HttpSession session = req.getSession(false);
-		boolean flag = true;//默认验证码没问题
-		if(session == null || session.getAttribute("verifyCode") == null){
-			flag = false;
-		}else{
-			String verifyCode = (String)session.getAttribute("verifyCode");
-			if(!verifyCode.equalsIgnoreCase(valistr)){
-				flag = false;
-			}
+		//获取配置中的字符集
+		String encode = this.getServletContext().getInitParameter("encode");
+	    req.setCharacterEncoding(encode);
+	    //获取参数
+	    String username = req.getParameter("username");
+	    String password = req.getParameter("password");
+	    String remname = req.getParameter("remname");
+	    //表单验证
+	    if(WebUtils.isEmpty(username)){
+			WebUtils.setEmptyMsg(req, "用户名不能为空", resp);
+			return;
 		}
-		if(flag){
-			resp.getWriter().write("true");
-		}else{
-			resp.getWriter().write("false");
+		if(WebUtils.isEmpty(password)){
+			WebUtils.setEmptyMsg(req, "密码不能为空", resp);
+			return;
 		}
+		//记住用户名
+		//判断用户是否 勾选了记住用户名选项
+		if(remname != null && "true".equals(remname)){
+			//创建cookie并设置cookie
+			Cookie cookie = new Cookie("remname",URLEncoder.encode(username,encode));
+			//设置cookie存活的时间
+			cookie.setMaxAge(60*60*24*7);
+			//设置cookie路径
+			cookie.setPath(req.getContextPath()+"/");
+			//添加进相应头中
+			resp.addCookie(cookie);
+		}else{
+			Cookie cookie = new Cookie("remname","");
+			cookie.setMaxAge(0);
+			cookie.setPath(req.getContextPath()+"/");
+			resp.addCookie(cookie);
+		}
+		resp.sendRedirect(req.getContextPath()+"/index.jsp");
 		
 	}
 
