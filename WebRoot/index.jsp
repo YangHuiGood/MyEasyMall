@@ -7,9 +7,10 @@
 		<title>欢迎光临EasyMall</title>
 	</head>
 	<body>
-	<%
+	<%--<%
 	 request.getRequestDispatcher("/_head.jsp").include(request, response);
-	 %>
+	 --%>
+	 <%@ include file="_head.jsp" %>
 		<div id="index">
 			<div id="line1">
 				<img src="img/index/banner_big.jpg"/>
@@ -45,8 +46,9 @@
 				</span>
 			</div>
 		</div>
-	<%
+	<%--<%
 	 request.getRequestDispatcher("/_foot.jsp").include(request, response);
-	%>
+	--%>
+	 <%@ include file="_foot.jsp" %>
 	</body>
 </html>

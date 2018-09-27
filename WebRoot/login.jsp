@@ -6,6 +6,15 @@
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 		<link rel="stylesheet" href="css/login.css"/>
 		<title>EasyMall欢迎您登陆</title>
+		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="js/jquery.validate.js"></script>
+		<script type="text/javascript" src="js/messages_zh.js"></script>
+		<script type="text/javascript" src="js/additional-methods.js"></script>
+		<style>
+        .error{
+	       color:red;
+           }
+     </style>
 	</head>
 	<body>
 	
@@ -29,8 +38,8 @@
 	  }
 	  //4.将用户名添加到username的input中
 	  %>
-		<h1>欢迎登陆EasyMall</h1>
-		<form action="/LoginServlet" method="POST">
+		<h1>欢迎登陆MyEasyMall</h1>
+		<form id="login" action="/LoginServlet" method="POST">
 			<table>
 			    <tr>
 			       <td style="text-align: center;color:red"><%=request.getAttribute("errMsg") == null? "":request.getAttribute("errMsg") %></td>
@@ -59,4 +68,35 @@
 			</table>
 		</form>		
 	</body>
+	<script type="text/javascript">
+	    $().ready(function() {
+			// 在键盘按下并释放及提交后验证提交表单
+			  $("#login").validate({
+			    rules: {
+			      username: {
+			        required: true,
+			        minlength: 2,
+			      },
+			      password: {
+			        required: true,
+			        minlength: 5
+			      }
+			    },
+			    messages: {
+			      username: {
+			        required: "请输入用户名",
+			        minlength: "用户名太短",
+			      },
+			      password: {
+			        required: "请输入密码",
+			        minlength: "密码长度不够"
+			      }
+			     },
+			     errorPlacement: function(error, element) {  
+                            error.appendTo(element.parent());  
+                          },
+                 onkeyup:false                 
+			    });
+});
+	   </script>
 </html>

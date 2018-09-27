@@ -12,7 +12,7 @@
 		     <!--用户没有登录  -->
 		     <a href="/login.jsp">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/regist.jsp">注册</a>
 		 <% }else{%>
-		    欢迎  &nbsp;<%=request.getSession().getAttribute("user") %> &nbsp;回来 |&nbsp;&nbsp;<a href="/LogoutServlet">注销</a>
+		    欢迎  &nbsp;${sessionScope.user.username} &nbsp;回来 |&nbsp;&nbsp;<a href="/LogoutServlet">注销</a>
 		  
 		 <% }
 		 %>
