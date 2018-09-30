@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -131,37 +132,37 @@
 			<table>
 			    <tr>
 			        <td colspan="2" style="text-align: center;color:red">
-			           <%=request.getAttribute("errMsg") == null ? "" : request.getAttribute("errMsg") %>
+			           ${empty requestScope.errMsg ? "" : requestScope.errMsg}
 			        </td>
 			    </tr>
 				<tr>
 					<td class="tds">用户名：</td>
 					<td>
-						<input type="text" id="username" name="username" value="<%=request.getParameter("username") == null ? "" : request.getParameter("username") %>"/>
+						<input type="text" id="username" name="username" value="${empty param.username ? "" : param.usename}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">密码：</td>
 					<td>
-						<input type="password" id="password" name="password" value="<%=request.getParameter("password") == null ? "" : request.getParameter("password") %>"/>
+						<input type="password" id="password" name="password" value="${empty param.password ? "" : param.password}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">确认密码：</td>
 					<td>
-						<input type="password" id="password2" name="password2" value="<%=request.getParameter("password2") == null ? "" : request.getParameter("password2") %>"/>
+						<input type="password" id="password2" name="password2" value="${empty param.password2 ? "" : param.password2}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">昵称：</td>
 					<td>
-						<input type="text" id="nickname" name="nickname" value="<%=request.getParameter("nickname") == null ? "" : request.getParameter("nickname") %>"/>
+						<input type="text" id="nickname" name="nickname" value="${empty param.nickname ? "" : param.nickname}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">邮箱：</td>
 					<td>
-						<input type="text" id="email" name="email" value="<%=request.getParameter("email") == null ? "" : request.getParameter("email") %>"/>
+						<input type="text" id="email" name="email" value="${empty param.email ? "" : param.email}"/>
 					</td>
 				</tr>
 				<tr>

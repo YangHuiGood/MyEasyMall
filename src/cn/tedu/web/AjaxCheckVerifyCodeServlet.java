@@ -25,11 +25,6 @@ public class AjaxCheckVerifyCodeServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		// 获取web.xml中配置的字符集
-		ServletContext sc = this.getServletContext();
-		String encode = sc.getInitParameter("encode");
-		// 1.处理乱码问题 请求乱码 应答乱码
-		resp.setContentType("text/html;charset=" + encode);
 		//获取请求参数
 		String valistr = req.getParameter("valistr");
 		//从session中取出验证码信息

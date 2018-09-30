@@ -9,6 +9,24 @@
     <param-name>encode</param-name>
     <param-value>utf-8</param-value>
   </context-param>
+  
+  <filter>
+    <filter-name>EncodingFilter</filter-name>
+    <filter-class>cn.tedu.filter.EncodingFilter</filter-class>
+  </filter>
+  <filter>
+    <filter-name>AutoLoginFilter</filter-name>
+    <filter-class>cn.tedu.filter.AutoLoginFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>EncodingFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  <filter-mapping>
+    <filter-name>AutoLoginFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+  
   <servlet>
     <servlet-name>RegistServlet</servlet-name>
     <servlet-class>cn.tedu.web.RegistServlet</servlet-class>

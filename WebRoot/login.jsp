@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import= "java.net.URLDecoder" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -38,15 +40,24 @@
 	  }
 	  //4.将用户名添加到username的input中
 	  %>
+	  
 		<h1>欢迎登陆MyEasyMall</h1>
 		<form id="login" action="/LoginServlet" method="POST">
 			<table>
 			    <tr>
-			       <td style="text-align: center;color:red"><%=request.getAttribute("errMsg") == null? "":request.getAttribute("errMsg") %></td>
+			    
+			       <td style="text-align: center;color:red">${empty requestScope.errMsg ? "" : requestScope.errMsg}</td>
 			    </tr>
 				<tr>
 					<td class="tdx">用户名：</td>
-					<td><input type="text" name="username" value="<%=username%>"/></td>
+					
+					<c:if test="${ not empty cookie.remname.value}" var="flag" scope="page">
+					  <td><input type="text" name="username" value="<%=username%>"/></td>
+					</c:if>
+					<c:if test="${!flag}">
+					  <td><input type="text" name="username" value=""/></td>
+					</c:if>
+					
 				</tr>
 				<tr>
 					<td class="tdx">密&nbsp;&nbsp; 码：</td>
@@ -55,7 +66,7 @@
 				<tr>
 					<td colspan="2">
 						<input type="checkbox" 
-						 <%=findC == null?"":"checked='checked'" %>
+						${empty cookie.remname.value ? "" : "checked='checked'"}
 						 name="remname" value="true"/>记住用户名
 						<input type="checkbox" name="autologin" value="true"/>30天内自动登陆
 					</td>

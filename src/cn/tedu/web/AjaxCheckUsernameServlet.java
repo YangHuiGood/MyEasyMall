@@ -31,14 +31,8 @@ public class AjaxCheckUsernameServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		//获取web.xml中配置的字符集
-		ServletContext sc = this.getServletContext();
-		String encode = sc.getInitParameter("encode");
-		//1.处理乱码问题 请求乱码  应答乱码
-		resp.setContentType("text/html;charset="+encode);
 		//获取请求参数
 		String username = req.getParameter("username");
-		
 		UserService service = BaseFactory.getFactory().getInstance(UserService.class);
 		boolean flag = service.hasUser(username);
 		if(!flag){
