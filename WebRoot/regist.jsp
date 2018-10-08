@@ -132,37 +132,37 @@
 			<table>
 			    <tr>
 			        <td colspan="2" style="text-align: center;color:red">
-			           ${empty requestScope.errMsg ? "" : requestScope.errMsg}
+			           ${requestScope.errMsg}
 			        </td>
 			    </tr>
 				<tr>
 					<td class="tds">用户名：</td>
 					<td>
-						<input type="text" id="username" name="username" value="${empty param.username ? "" : param.usename}"/>
+						<input type="text" id="username" name="username" value="${param.username}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">密码：</td>
 					<td>
-						<input type="password" id="password" name="password" value="${empty param.password ? "" : param.password}"/>
+						<input type="password" id="password" name="password" value="${param.password}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">确认密码：</td>
 					<td>
-						<input type="password" id="password2" name="password2" value="${empty param.password2 ? "" : param.password2}"/>
+						<input type="password" id="password2" name="password2" value="${param.password2}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">昵称：</td>
 					<td>
-						<input type="text" id="nickname" name="nickname" value="${empty param.nickname ? "" : param.nickname}"/>
+						<input type="text" id="nickname" name="nickname" value="${param.nickname}"/>
 					</td>
 				</tr>
 				<tr>
 					<td class="tds">邮箱：</td>
 					<td>
-						<input type="text" id="email" name="email" value="${empty param.email ? "" : param.email}"/>
+						<input type="text" id="email" name="email" value="${param.email}"/>
 					</td>
 				</tr>
 				<tr>

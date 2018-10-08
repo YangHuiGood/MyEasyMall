@@ -46,7 +46,7 @@
 			<table>
 			    <tr>
 			    
-			       <td style="text-align: center;color:red">${empty requestScope.errMsg ? "" : requestScope.errMsg}</td>
+			       <td style="text-align: center;color:red">${requestScope.errMsg}</td>
 			    </tr>
 				<tr>
 					<td class="tdx">用户名：</td>
