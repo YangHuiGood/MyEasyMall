@@ -9,6 +9,7 @@ import cn.tedu.domain.Prod;
 import cn.tedu.domain.ProdCategory;
 import cn.tedu.exception.MsgException;
 import cn.tedu.util.JDBCUtils;
+import cn.tedu.util.TransactionManager;
 
 public class ProdDaoImpl implements ProdDao {
 
@@ -19,7 +20,7 @@ public class ProdDaoImpl implements ProdDao {
 		PreparedStatement ps=null;
 		ResultSet rs=null;
 		try {
-			conn=JDBCUtils.getConnection();
+			conn= TransactionManager.getConn();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, cname);
 			rs = ps.executeQuery();
@@ -31,7 +32,7 @@ public class ProdDaoImpl implements ProdDao {
 			e.printStackTrace();
 			throw new MsgException("查询商品种类时出现异常");
 		}finally{
-			JDBCUtils.close(conn, ps, rs);
+			JDBCUtils.close(null, ps, rs);
 		}
 		return -1;
 	}
@@ -42,7 +43,7 @@ public class ProdDaoImpl implements ProdDao {
 		Connection conn=null;
 		PreparedStatement ps=null;
 		try {
-			conn=JDBCUtils.getConnection();
+			conn = TransactionManager.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, pc.getCname());
 			int i=ps.executeUpdate();
@@ -52,7 +53,7 @@ public class ProdDaoImpl implements ProdDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			JDBCUtils.close(conn, ps, null);
+			JDBCUtils.close(null, ps, null);
 		}
 		return false;
 	}
@@ -63,7 +64,7 @@ public class ProdDaoImpl implements ProdDao {
 		Connection conn=null;
 		PreparedStatement ps=null;
 		try {
-			conn=JDBCUtils.getConnection();
+			conn = TransactionManager.getConn();
 			ps=conn.prepareStatement(sql);
 			ps.setString(1, prod.getName());
 			ps.setDouble(2, prod.getPrice());
@@ -78,7 +79,7 @@ public class ProdDaoImpl implements ProdDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			JDBCUtils.close(conn, ps, null);
+			JDBCUtils.close(null, ps, null);
 		}
 		return false;
 	}

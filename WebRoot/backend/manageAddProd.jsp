@@ -13,6 +13,11 @@
 		<hr>
 			<form action="${app }/ManageAddProdServlet" method="POST" enctype="multipart/form-data">
 				<table align="center" border="1" cellspacing="0px" cellpadding="5px">
+				    <tr>
+						<td colspan="2" style="text-align:center;color:red">
+							${requestScope.errMsg}
+						</td>
+					</tr>
 					<tr>
 						<td>商品名称</td>
 						<td><input type="text" name="name"/></td>
