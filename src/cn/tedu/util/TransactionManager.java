@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * 
+ * 用于事务管理的类
  * @author yanghui
  *
  */

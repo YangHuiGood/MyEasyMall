@@ -42,7 +42,7 @@
 		<div id="menu_bar">
 		
 			<div><a href="${app }/backend/manageAddProd.jsp" target="rightFrame">> 商品添加</a></div>
-			<div><a href="${app }/backend/manageProdList.jsp" target="rightFrame">> 商品修改</a></div>
+			<div><a href="${app }/ManageShowAllProdServlet" target="rightFrame">> 商品列表</a></div>
 			<div><a href="#" >> 权限管理</a></div>
 			<div><a href="#" >> 订单管理</a></div>
 			<div><a href="#" >> 销售榜单</a></div>

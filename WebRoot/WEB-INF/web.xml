@@ -10,6 +10,12 @@
     <param-value>utf-8</param-value>
   </context-param>
   
+  <!-- 配置监听 -->
+  <listener>
+    <listener-class>cn.tedu.listener.MyServletContextListener</listener-class>
+  
+  </listener>
+  
   <filter>
     <filter-name>EncodingFilter</filter-name>
     <filter-class>cn.tedu.filter.EncodingFilter</filter-class>
@@ -57,6 +63,26 @@
     <servlet-name>ManageAddProdServlet</servlet-name>
     <servlet-class>cn.tedu.backend.web.ManageAddProdServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ShowAllProdServlet</servlet-name>
+    <servlet-class>cn.tedu.web.ShowAllProdServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ProdImgServlet</servlet-name>
+    <servlet-class>cn.tedu.web.ProdImgServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ManageShowAllProdServlet</servlet-name>
+    <servlet-class>cn.tedu.backend.web.ManageShowAllProdServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ManageUpdateProdServlet</servlet-name>
+    <servlet-class>cn.tedu.backend.web.ManageUpdateProdServlet</servlet-class>
+  </servlet>
+
+
+
+
 
 
 
@@ -91,6 +117,22 @@
   <servlet-mapping>
     <servlet-name>ManageAddProdServlet</servlet-name>
     <url-pattern>/ManageAddProdServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ShowAllProdServlet</servlet-name>
+    <url-pattern>/ShowAllProdServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ProdImgServlet</servlet-name>
+    <url-pattern>/ProdImgServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ManageShowAllProdServlet</servlet-name>
+    <url-pattern>/ManageShowAllProdServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ManageUpdateProdServlet</servlet-name>
+    <url-pattern>/ManageUpdateProdServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>

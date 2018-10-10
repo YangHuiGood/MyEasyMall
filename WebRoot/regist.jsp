@@ -5,11 +5,11 @@
 	<head>
 		<title>欢迎注册MyEasyMall</title>
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="css/regist.css"/>
-		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-		<script type="text/javascript" src="js/jquery.validate.js"></script>
-		<script type="text/javascript" src="js/messages_zh.js"></script>
-		<script type="text/javascript" src="js/additional-methods.js"></script>
+		<link rel="stylesheet" href="${app }/css/regist.css"/>
+		<script type="text/javascript" src="${app }/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="${app }/js/jquery.validate.js"></script>
+		<script type="text/javascript" src="${app }/js/messages_zh.js"></script>
+		<script type="text/javascript" src="${app }/js/additional-methods.js"></script>
 		<script type="text/javascript">
 	    $().ready(function() {
 			// 在键盘按下并释放及提交后验证提交表单

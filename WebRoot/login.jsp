@@ -6,12 +6,12 @@
 <html>
 	<head>
 		<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
-		<link rel="stylesheet" href="css/login.css"/>
+		<link rel="stylesheet" href="${app }/css/login.css"/>
 		<title>EasyMall欢迎您登陆</title>
-		<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
-		<script type="text/javascript" src="js/jquery.validate.js"></script>
-		<script type="text/javascript" src="js/messages_zh.js"></script>
-		<script type="text/javascript" src="js/additional-methods.js"></script>
+		<script type="text/javascript" src="${app }/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" src="${app }/js/jquery.validate.js"></script>
+		<script type="text/javascript" src="${app }/js/messages_zh.js"></script>
+		<script type="text/javascript" src="${app }/js/additional-methods.js"></script>
 		<style>
         .error{
 	       color:red;
