@@ -144,4 +144,94 @@ public class ProdDaoImpl implements ProdDao {
 		return false;
 	}
 
+	@Override
+	public int getCidById(int pid) {
+		String sql="select cid from prod where id=?";
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			conn= TransactionManager.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, pid);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				//说明存在改商品种类id
+				return rs.getInt("cid");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCUtils.close(null, ps, rs);
+		}
+		return -1;
+	}
+
+	@Override
+	public int getProdCountByCid(int cid) {
+		String sql="select count(*) from prod where cid=? for update";
+		Connection conn=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		try {
+			conn= TransactionManager.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cid);
+			rs = ps.executeQuery();
+			if(rs.next()){
+				//说明存在改商品种类id
+				return rs.getInt("count(*)");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCUtils.close(null, ps, rs);
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean delProdById(int pid) {
+		String sql="delete from prod where id=?";
+		Connection conn=null;
+		PreparedStatement ps=null;
+		try {
+			conn= TransactionManager.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, pid);
+			int len = ps.executeUpdate();
+			if(len > 0){
+				//说明存在改商品种类id
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCUtils.close(null, ps, null);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean delProdCateById(int cid) {
+		String sql="delete from prod_category where id=?";
+		Connection conn=null;
+		PreparedStatement ps=null;
+		try {
+			conn= TransactionManager.getConn();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, cid);
+			int len = ps.executeUpdate();
+			if(len > 0){
+				//说明存在改商品种类id
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			JDBCUtils.close(null, ps, null);
+		}
+		return false;
+	}
+
 }

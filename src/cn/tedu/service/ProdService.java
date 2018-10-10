@@ -24,4 +24,11 @@ public interface ProdService {
 	 * @return true-更新成功 false-更新失败
 	 */
 	boolean updateProd(Prod prod);
+
+	/**
+	 * 根据商品id删除商品信息
+	 * @param pid 商品id
+	 * @return true-删除成功 false-删除失败
+	 */
+	boolean delProd(int pid);
 }

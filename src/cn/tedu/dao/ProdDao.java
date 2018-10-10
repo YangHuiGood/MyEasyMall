@@ -41,4 +41,32 @@ public interface ProdDao {
 	 * @return true-更新成功 false-更新失败
 	 */
 	boolean updateProd(Prod prod);
+
+	/**
+	 * 根据商品id查询商品种类id
+	 * @param pid 商品id
+	 * @return 返回商品种类id值
+	 */
+	int getCidById(int pid);
+
+	/**
+	 * 根据商品种类id查询该种类商品的数量
+	 * @param cid 商品种类id
+	 * @return 返回商品的数量
+	 */
+	int getProdCountByCid(int cid);
+
+	/**
+	 * 根据商品id删除商品信息
+	 * @param pid 商品id
+	 * @return true-删除成功 false-删除失败
+	 */
+	boolean delProdById(int pid);
+
+	/**
+	 * 根据种类id删除种类信息
+	 * @param cid 商品种类id
+	 * @return true-删除商品种类成功 false-删除商品种类失败
+	 */
+	boolean delProdCateById(int cid);
 }

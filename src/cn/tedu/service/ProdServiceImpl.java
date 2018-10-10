@@ -117,5 +117,34 @@ public class ProdServiceImpl implements ProdService {
 		}
 		return flag;
 	}
+	@Override
+	public boolean delProd(int pid) {
+		// 需求：如果该商品是最后一个商品则删除商品种类，如果不是则只删除该商品信息
+		boolean flag = false;
+		try {
+			//开启事务
+			TransactionManager.startTran();
+			//根据商品id查询商品种类id
+			int cid = dao.getCidById(pid);
+			//根据商品种类id查询该种类商品的商品数量
+			int prodCount = dao.getProdCountByCid(cid); 
+			//判断商品数量
+			if(prodCount > 1){
+				flag = dao.delProdById(pid);
+			}else if(prodCount == 1){
+				flag = dao.delProdById(pid);
+				flag = dao.delProdCateById(cid) && flag;
+			}
+			//提交事务
+			TransactionManager.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+			//回滚事务
+			TransactionManager.rollback();
+		}finally{
+			TransactionManager.closeConn();
+		}
+		return flag;
+	}
 
 }

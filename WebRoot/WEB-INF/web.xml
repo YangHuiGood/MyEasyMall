@@ -79,6 +79,13 @@
     <servlet-name>ManageUpdateProdServlet</servlet-name>
     <servlet-class>cn.tedu.backend.web.ManageUpdateProdServlet</servlet-class>
   </servlet>
+  <servlet>
+    <description>This is the description of my J2EE component</description>
+    <display-name>This is the display name of my J2EE component</display-name>
+    <servlet-name>ManageDelProdServlet</servlet-name>
+    <servlet-class>cn.tedu.backend.web.ManageDelProdServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -133,6 +140,10 @@
   <servlet-mapping>
     <servlet-name>ManageUpdateProdServlet</servlet-name>
     <url-pattern>/ManageUpdateProdServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ManageDelProdServlet</servlet-name>
+    <url-pattern>/ManageDelProdServlet</url-pattern>
   </servlet-mapping>	
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
